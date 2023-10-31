@@ -80,6 +80,7 @@ public class SpotifyLikeApp {
         break;
       case "l":
         System.out.println("-->Library<--");
+        libraryDisplay(library);
         break;
       case "p":
         System.out.println("-->Play<--");
@@ -93,9 +94,17 @@ public class SpotifyLikeApp {
     }
   }
 
-  /*
-   * plays an audio file
-   */
+  // prints the music library
+  public static void libraryDisplay(JSONArray library) {
+    // loop through JSONArray and print song names of each file
+    for (int i = 0; i < library.size(); i++) {
+      JSONObject obj = (JSONObject) library.get(i);
+      String songName = (String) obj.get("name");
+      System.out.println((i + 1) + ". " + songName);
+    }
+  }
+
+  // plays an audio file
   public static void play(JSONArray library) {
     // open the audio file
 
