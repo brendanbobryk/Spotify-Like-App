@@ -16,7 +16,6 @@ import org.json.simple.parser.*;
  * Program: Spotify-Like-App
  */
 
-// declares a class for the app
 public class SpotifyLikeApp {
 
   // global variables for the app
@@ -26,7 +25,6 @@ public class SpotifyLikeApp {
 
   private static String basePath = "C:\\Users\\Brendan\\Documents\\GitHub\\Spotify-Like-App\\spotify_like_app\\src\\main\\java\\com\\cis084javaprogramming";
 
-  // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
     // reading audio library from json file
     JSONArray library = readAudioLibrary();
@@ -52,9 +50,7 @@ public class SpotifyLikeApp {
     input.close();
   }
 
-  /*
-   * displays the menu for the app
-   */
+  // displays the menu for the app
   public static void menu() {
     System.out.println("---- SpotifyLikeApp ----");
     System.out.println("[H]ome");
@@ -66,10 +62,9 @@ public class SpotifyLikeApp {
     System.out.print("Enter q to Quit:");
   }
 
-  /*
-   * handles the user input for the app
-   */
+  // handles the user input for the app
   public static void handleMenu(String userInput, JSONArray library, Scanner input) {
+    System.out.println("");
     switch (userInput) {
       case "h":
         System.out.println("-->Home<--");
@@ -80,9 +75,19 @@ public class SpotifyLikeApp {
         break;
       case "l":
         System.out.println("-->Library<--");
+        // displays current library
         libraryDisplay(library);
+        // prompts user to select a song to play
+        System.out.println("");
         System.out.println("Which song would you like to play? (1-" + library.size() + ")?");
         int songIndex = (input.nextInt() - 1);
+        // input validation to ensure the value of the selection is an option listed
+        while (songIndex < 0 || songIndex > (library.size() - 1)) {
+          System.out.println("");
+          System.out.println("That is not a valid entry, please enter a number between 1-" + library.size() + ".");
+          songIndex = (input.nextInt() - 1);
+        }
+        // plays selected song
         play(library, songIndex);
         break;
       case "q":
@@ -105,9 +110,7 @@ public class SpotifyLikeApp {
 
   // plays an audio file
   public static void play(JSONArray library, Integer songIndex) {
-    // open the audio file
-
-    // get the filePath and open a audio file
+    // get the filePath and open the selected audio file
     JSONObject obj = (JSONObject) library.get(songIndex);
     final String filename = (String) obj.get("filename");
     final String filePath = basePath + "/wav/" + filename;
@@ -132,16 +135,17 @@ public class SpotifyLikeApp {
       e.printStackTrace();
     }
 
+    // prints the details of the song along with the location in the file system
+    System.out.println("");
     System.out.println("Now playing: " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
         + obj.get("genre"));
     System.out.println("Found in: " + filePath);
+    System.out.println("");
   }
 
-  //
   // Func: readJSONFile
   // Desc: Reads a json file storing an array and returns an object
   // that can be iterated over
-  //
   public static JSONArray readJSONArrayFile(String fileName) {
     // JSON parser object to parse read file
     JSONParser jsonParser = new JSONParser();

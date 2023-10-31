@@ -16,8 +16,8 @@
   {
     "name": "Tanzen",
     "artist": "Checkie Brown",
-    "year": "",
-    "genre": "",
+    "year": "2016",
+    "genre": "Jazz/Blues",
     "filename": "checkie-brown1-crop.wav"
   },
   {
@@ -32,7 +32,7 @@
     "artist": "Kitkat Club",
     "year": "2018",
     "genre": "Electronic/Reggae",
-    "filename": "kitkat-crop.wav"
+    "filename": "kit-kat-crop.wav"
   },
   {
     "name": "El Preso Numero Nueve",
@@ -51,8 +51,8 @@
   {
     "name": "Burn-It-Down",
     "artist": "Mid Air Machine",
-    "year": "",
-    "genre": "",
+    "year": "2017",
+    "genre": "Electronic",
     "filename": "mid-air-crop.wav"
   },
   {
