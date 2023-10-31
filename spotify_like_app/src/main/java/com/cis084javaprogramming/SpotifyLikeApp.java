@@ -39,13 +39,13 @@ public class SpotifyLikeApp {
       menu();
 
       // get input
-      userInput = input.nextLine();
+      userInput = input.next();
 
       // accept upper or lower case commands
       userInput = userInput.toLowerCase();
 
       // do something
-      handleMenu(userInput, library);
+      handleMenu(userInput, library, input);
     }
 
     // close the scanner
@@ -60,7 +60,6 @@ public class SpotifyLikeApp {
     System.out.println("[H]ome");
     System.out.println("[S]earch by title");
     System.out.println("[L]ibrary");
-    System.out.println("[P]lay");
     System.out.println("[Q]uit");
 
     System.out.println("");
@@ -70,21 +69,21 @@ public class SpotifyLikeApp {
   /*
    * handles the user input for the app
    */
-  public static void handleMenu(String userInput, JSONArray library) {
+  public static void handleMenu(String userInput, JSONArray library, Scanner input) {
     switch (userInput) {
       case "h":
         System.out.println("-->Home<--");
         break;
       case "s":
         System.out.println("-->Search by title<--");
+        System.out.println("Enter the title of the song you would like to play:");
         break;
       case "l":
         System.out.println("-->Library<--");
         libraryDisplay(library);
-        break;
-      case "p":
-        System.out.println("-->Play<--");
-        play(library);
+        System.out.println("Which song would you like to play? (1-" + library.size() + ")?");
+        int songIndex = (input.nextInt() - 1);
+        play(library, songIndex);
         break;
       case "q":
         System.out.println("-->Quit<--");
@@ -96,7 +95,7 @@ public class SpotifyLikeApp {
 
   // prints the music library
   public static void libraryDisplay(JSONArray library) {
-    // loop through JSONArray and print song names of each file
+    // loops through JSONArray and print song names of each file
     for (int i = 0; i < library.size(); i++) {
       JSONObject obj = (JSONObject) library.get(i);
       String songName = (String) obj.get("name");
@@ -105,11 +104,10 @@ public class SpotifyLikeApp {
   }
 
   // plays an audio file
-  public static void play(JSONArray library) {
+  public static void play(JSONArray library, Integer songIndex) {
     // open the audio file
 
     // get the filePath and open a audio file
-    final Integer songIndex = 3;
     JSONObject obj = (JSONObject) library.get(songIndex);
     final String filename = (String) obj.get("filename");
     final String filePath = basePath + "/wav/" + filename;
@@ -133,6 +131,10 @@ public class SpotifyLikeApp {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+    System.out.println("Now playing: " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
+        + obj.get("genre"));
+    System.out.println("Found in: " + filePath);
   }
 
   //
