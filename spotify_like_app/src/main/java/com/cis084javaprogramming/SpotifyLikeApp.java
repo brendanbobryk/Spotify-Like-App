@@ -1,6 +1,6 @@
 package com.cis084javaprogramming;
 
-import static javax.sound.sampled.AudioSystem.*;
+// import static javax.sound.sampled.AudioSystem.*;
 
 import java.io.*;
 import java.util.*;
@@ -20,10 +20,8 @@ import java.util.ArrayList;
 public class SpotifyLikeApp {
 
   // global variables for the app
-  String status;
-  Long position;
-  static Integer currentSongIndex = -1;
-  static ArrayList<Integer> recentlyPlayedSongIndexes = new ArrayList<Integer>();
+  static private Integer currentSongIndex = -1;
+  static private ArrayList<Integer> recentlyPlayedSongIndexes = new ArrayList<Integer>();
   static Clip audioClip;
 
   private static String basePath = "C:\\Users\\Brendan\\Documents\\GitHub\\Spotify-Like-App\\spotify_like_app\\src\\main\\java\\com\\cis084javaprogramming";
