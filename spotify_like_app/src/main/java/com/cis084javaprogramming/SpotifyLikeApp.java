@@ -58,8 +58,7 @@ public class SpotifyLikeApp {
     System.out.println("[L]ibrary");
     System.out.println("[Q]uit");
 
-    System.out.println("");
-    System.out.print("Enter q to Quit:");
+    System.out.print("\nEnter q to Quit:");
   }
 
   // handles the user input for the app
@@ -73,19 +72,25 @@ public class SpotifyLikeApp {
       case "s":
         System.out.println("-->Search by title<--");
         System.out.println("Enter the title of the song you would like to play:");
+        String inputtedSongName = input.next();
+        Integer songSearchIndex = -1;
+        songSearchIndex = searchByTitle(library, inputtedSongName, songSearchIndex);
+        if (songSearchIndex != (-1)) {
+          play(library, songSearchIndex);
+        } else {
+          System.out.println("\n Could not find a song with the given search criteria. \n");
+        }
         break;
       case "l":
         System.out.println("-->Library<--");
         // displays current library
         libraryDisplay(library);
         // prompts user to select a song to play
-        System.out.println("");
-        System.out.println("Which song would you like to play? (1-" + library.size() + ")?");
+        System.out.println("\nWhich song would you like to play? (1-" + library.size() + ")?");
         int songIndex = (input.nextInt() - 1);
         // input validation to ensure the value of the selection is an option listed
         while (songIndex < 0 || songIndex > (library.size() - 1)) {
-          System.out.println("");
-          System.out.println("That is not a valid entry, please enter a number between 1-" + library.size() + ".");
+          System.out.println("\nThat is not a valid entry, please enter a number between 1-" + library.size() + ".");
           songIndex = (input.nextInt() - 1);
         }
         // plays selected song
@@ -97,6 +102,19 @@ public class SpotifyLikeApp {
       default:
         break;
     }
+  }
+
+  public static int searchByTitle(JSONArray library, String inputtedSongName, Integer songSearchIndex) {
+    for (int i = 0; i < library.size(); i++) {
+      // Checks name to see if it matches input
+      JSONObject obj = (JSONObject) library.get(i);
+      String songName = (String) obj.get("name");
+      if (songName.toLowerCase().contains(inputtedSongName.toLowerCase())) {
+        songSearchIndex = i;
+        break;
+      }
+    }
+    return songSearchIndex;
   }
 
   // prints the most recently played songs
@@ -142,11 +160,9 @@ public class SpotifyLikeApp {
     }
 
     // prints the details of the song along with the location in the file system
-    System.out.println("");
-    System.out.println("Now playing: " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
+    System.out.println("\nNow playing: " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
         + obj.get("genre"));
-    System.out.println("Found in: " + filePath);
-    System.out.println("");
+    System.out.println("Found in: " + filePath + "\n");
   }
 
   // Func: readJSONFile
