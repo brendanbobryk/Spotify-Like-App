@@ -68,6 +68,7 @@ public class SpotifyLikeApp {
     switch (userInput) {
       case "h":
         System.out.println("-->Home<--");
+        homeDisplay(library);
         break;
       case "s":
         System.out.println("-->Search by title<--");
@@ -98,13 +99,18 @@ public class SpotifyLikeApp {
     }
   }
 
+  // prints the most recently played songs
+  public static void homeDisplay(JSONArray library) {
+    System.out.println("You have a total of " + library.size() + " songs.");
+  }
+
   // prints the music library
   public static void libraryDisplay(JSONArray library) {
     // loops through JSONArray and print song names of each file
     for (int i = 0; i < library.size(); i++) {
       JSONObject obj = (JSONObject) library.get(i);
-      String songName = (String) obj.get("name");
-      System.out.println((i + 1) + ". " + songName);
+      System.out.println((i + 1) + ". " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
+          + obj.get("genre"));
     }
   }
 
