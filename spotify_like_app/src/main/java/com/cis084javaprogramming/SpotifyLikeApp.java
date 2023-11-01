@@ -65,22 +65,27 @@ public class SpotifyLikeApp {
   public static void handleMenu(String userInput, JSONArray library, Scanner input) {
     System.out.println("");
     switch (userInput) {
+      // [H]ome
       case "h":
         System.out.println("-->Home<--");
         homeDisplay(library);
         break;
+      // [S]earch by title
       case "s":
         System.out.println("-->Search by title<--");
+        // prompt and retrieval of song title
         System.out.println("Enter the title of the song you would like to play:");
         String inputtedSongName = input.next();
         Integer songSearchIndex = -1;
         songSearchIndex = searchByTitle(library, inputtedSongName, songSearchIndex);
+        // checks if value was reassigned
         if (songSearchIndex != (-1)) {
           play(library, songSearchIndex);
         } else {
           System.out.println("\n Could not find a song with the given search criteria. \n");
         }
         break;
+      // [L]ibrary
       case "l":
         System.out.println("-->Library<--");
         // displays current library
@@ -96,6 +101,7 @@ public class SpotifyLikeApp {
         // plays selected song
         play(library, songIndex);
         break;
+      // [Q]uit
       case "q":
         System.out.println("-->Quit<--");
         break;
@@ -104,16 +110,18 @@ public class SpotifyLikeApp {
     }
   }
 
+  // searches for the users input within the song library
   public static int searchByTitle(JSONArray library, String inputtedSongName, Integer songSearchIndex) {
     for (int i = 0; i < library.size(); i++) {
-      // Checks name to see if it matches input
       JSONObject obj = (JSONObject) library.get(i);
       String songName = (String) obj.get("name");
+      // Checks name to see if it matches input
       if (songName.toLowerCase().contains(inputtedSongName.toLowerCase())) {
         songSearchIndex = i;
         break;
       }
     }
+    // returns song index
     return songSearchIndex;
   }
 
@@ -124,7 +132,7 @@ public class SpotifyLikeApp {
 
   // prints the music library
   public static void libraryDisplay(JSONArray library) {
-    // loops through JSONArray and print song names of each file
+    // loops through JSONArray and prints the details of each file
     for (int i = 0; i < library.size(); i++) {
       JSONObject obj = (JSONObject) library.get(i);
       System.out.println((i + 1) + ". " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
