@@ -7,6 +7,7 @@ import java.util.*;
 import javax.sound.sampled.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import java.util.ArrayList;
 
 /**
  * Name: Brendan Bobryk
@@ -21,6 +22,8 @@ public class SpotifyLikeApp {
   // global variables for the app
   String status;
   Long position;
+  static Integer currentSongIndex = -1;
+  static ArrayList<Integer> recentlyPlayedSongIndexes = new ArrayList<Integer>();
   static Clip audioClip;
 
   private static String basePath = "C:\\Users\\Brendan\\Documents\\GitHub\\Spotify-Like-App\\spotify_like_app\\src\\main\\java\\com\\cis084javaprogramming";
@@ -125,9 +128,35 @@ public class SpotifyLikeApp {
     return songSearchIndex;
   }
 
-  // prints the most recently played songs
+  // prints the currently playing song and previously played songs
   public static void homeDisplay(JSONArray library) {
-    System.out.println("You have a total of " + library.size() + " songs.");
+    // currently playing display
+    System.out.println("Currently playing:");
+    // if no song is playing
+    if (currentSongIndex == -1) {
+      System.out.println("There is currently no song playing.\n");
+      // if a song is playing
+    } else {
+      JSONObject obj = (JSONObject) library.get(currentSongIndex);
+      System.out.println(obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
+          + obj.get("genre") + "\n");
+    }
+    // previously played display
+    System.out.println("Previously played songs:");
+    // if no songs have played or only one which is currently playing
+    if (recentlyPlayedSongIndexes.size() == 0 || recentlyPlayedSongIndexes.size() == 1) {
+      System.out.println("No songs have been played previously.\n");
+      // if the user has changed songs after the first song played
+      // lists the three, or less, most recent songs played
+    } else {
+      int countUp = 0;
+      for (int i = (recentlyPlayedSongIndexes.size() - 1); i > (recentlyPlayedSongIndexes.size() - 4) && i > 0; i--) {
+        countUp++;
+        JSONObject obj = (JSONObject) library.get(recentlyPlayedSongIndexes.get(i - 1));
+        System.out.println(countUp + ". " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
+            + obj.get("genre"));
+      }
+    }
   }
 
   // prints the music library
@@ -166,6 +195,12 @@ public class SpotifyLikeApp {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+    // updates the currentSongIndex
+    currentSongIndex = songIndex;
+
+    // updates the recentlyPlayedSongIndexes
+    recentlyPlayedSongIndexes.add(songIndex);
 
     // prints the details of the song along with the location in the file system
     System.out.println("\nNow playing: " + obj.get("name") + " by " + obj.get("artist") + ", " + obj.get("year") + ", "
