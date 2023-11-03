@@ -116,7 +116,7 @@ public class SpotifyLikeApp {
     for (int i = 0; i < library.size(); i++) {
       JSONObject obj = (JSONObject) library.get(i);
       String songName = (String) obj.get("name");
-      // Checks name to see if it matches input
+      // checks name to see if it matches input
       if (songName.toLowerCase().contains(inputtedSongName.toLowerCase())) {
         songSearchIndex = i;
         break;
