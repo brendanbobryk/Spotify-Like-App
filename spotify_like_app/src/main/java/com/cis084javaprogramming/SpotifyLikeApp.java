@@ -264,11 +264,12 @@ public class SpotifyLikeApp {
       System.out.println("[A]dvance 5 seconds");
       System.out.println("[F]avorite");
       System.out.println("[M]ain Menu");
+
       System.out.print("\nEnter m to go back to the Main Menu: ");
       songOption = input.next().toLowerCase();
       System.out.println("");
       switch (songOption) {
-        // pauses or resumes the audio file
+        // [P]ause / Resume
         case "p":
           if (audioClip.isRunning()) {
             System.out.println("The song is now paused.");
@@ -280,13 +281,13 @@ public class SpotifyLikeApp {
             audioClip.start();
           }
           break;
-        // stops the audio file
+        // [S]top
         case "s":
           System.out.println("The song is now stopped.");
           // stops the audio file
           audioClip.stop();
           break;
-        // rewinds an audio file 5 seconds
+        // [R]ewind 5 seconds
         case "r":
           // stops audio file and retrieves the microsecond position
           audioClip.stop();
@@ -297,7 +298,7 @@ public class SpotifyLikeApp {
           audioClip.setMicrosecondPosition(time);
           audioClip.start();
           break;
-        // advances an audio file 5 seconds
+        // [A]dvance 5 seconds
         case "a":
           // stops audio file and retrieves the microsecond position
           audioClip.stop();
@@ -308,9 +309,10 @@ public class SpotifyLikeApp {
           audioClip.setMicrosecondPosition(time);
           audioClip.start();
           break;
+        // [F]avorite
         case "f":
           if (obj.get("favorite").equals("true")) {
-            System.out.println("Would you like to remove this song to your favourites? (Y/N)");
+            System.out.println("Would you like to remove this song to your favorites? (Y/N)");
             String favoriteAnswer = input.next().toLowerCase();
             // if the song is in the favorites list, program asks user if they would like it
             // removed
@@ -325,7 +327,7 @@ public class SpotifyLikeApp {
           } else {
             // if the song is not in the favorites list, program asks user if they would
             // like it added
-            System.out.println("Would you like to add this song to your favourites? (Y/N)");
+            System.out.println("Would you like to add this song to your favorites? (Y/N)");
             String favoriteAnswer = input.next().toLowerCase();
             if (favoriteAnswer.equals("y")) {
               obj.put((String) "favorite", (String) "true");
@@ -337,12 +339,12 @@ public class SpotifyLikeApp {
             }
           }
           break;
+        // [M]ain Menu
         case "m":
           break;
         default:
           break;
       }
-
     }
   }
 
