@@ -4,6 +4,7 @@
     "artist": "Ava Luna",
     "year": "2011",
     "genre": "R&B/Soul",
+    "favorite": "false",
     "filename": "ava-luna-crop.wav"
   },
   {
@@ -11,6 +12,7 @@
     "artist": "Bisou",
     "year": "2018",
     "genre": "Dance/Electronic",
+    "favorite": "false",
     "filename": "bisou-crop.wav"
   },
   {
@@ -18,6 +20,7 @@
     "artist": "Checkie Brown",
     "year": "2016",
     "genre": "Jazz/Blues",
+    "favorite": "false",
     "filename": "checkie-brown1-crop.wav"
   },
   {
@@ -25,6 +28,7 @@
     "artist": "Checkie Brown",
     "year": "2020",
     "genre": "R&B/Soul",
+    "favorite": "false",
     "filename": "checkie-brown2-crop.wav"
   },
   {
@@ -32,6 +36,7 @@
     "artist": "Kitkat Club",
     "year": "2018",
     "genre": "Electronic/Reggae",
+    "favorite": "false",
     "filename": "kit-kat-crop.wav"
   },
   {
@@ -39,6 +44,7 @@
     "artist": "Kathleen Martin",
     "year": "2014",
     "genre": "Historic/Folk",
+    "favorite": "false",
     "filename": "kathleen-crop.wav"
   },
   {
@@ -46,6 +52,7 @@
     "artist": "Scott Holmes",
     "year": "2020",
     "genre": "Pop/Folk",
+    "favorite": "false",
     "filename": "scott-crop.wav"
   },
   {
@@ -53,6 +60,7 @@
     "artist": "Mid Air Machine",
     "year": "2017",
     "genre": "Electronic",
+    "favorite": "false",
     "filename": "mid-air-crop.wav"
   },
   {
@@ -60,6 +68,7 @@
     "artist": "Dee Yan",
     "year": "2018",
     "genre": "Folk",
+    "favorite": "false",
     "filename": "dee-yan-crop.wav"
   },
   {
@@ -67,6 +76,7 @@
     "artist": "The Dubbstyle",
     "year": "2019",
     "genre": "Reggae",
+    "favorite": "false",
     "filename": "dubb-style-crop.wav"
   }
 ]
