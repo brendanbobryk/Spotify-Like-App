@@ -255,6 +255,7 @@ public class SpotifyLikeApp {
     // displays and loops through song options until user chooses to go back to the
     // main menu
     String songOption = "";
+    long time = 0;
     while (!songOption.equals("m")) {
       System.out.println("---- Song Options ----");
       System.out.println("[P]ause / Resume");
@@ -285,9 +286,27 @@ public class SpotifyLikeApp {
           // stops the audio file
           audioClip.stop();
           break;
+        // rewinds an audio file 5 seconds
         case "r":
+          // stops audio file and retrieves the microsecond position
+          audioClip.stop();
+          // calculates the rewinded position in the audio file
+          time = audioClip.getMicrosecondPosition() - (5 * (long) Math.pow(10, 6));
+          // sets the position of the adjusted microsecond value and resumes playing from
+          // adjusted position
+          audioClip.setMicrosecondPosition(time);
+          audioClip.start();
           break;
+        // advances an audio file 5 seconds
         case "a":
+          // stops audio file and retrieves the microsecond position
+          audioClip.stop();
+          // calculates the advanced position in the audio file
+          time = audioClip.getMicrosecondPosition() + (5 * (long) Math.pow(10, 6));
+          // sets the position of the adjusted microsecond value and resumes playing from
+          // adjusted position
+          audioClip.setMicrosecondPosition(time);
+          audioClip.start();
           break;
         case "f":
           if (obj.get("favorite").equals("true")) {
