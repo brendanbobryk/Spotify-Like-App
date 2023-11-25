@@ -262,6 +262,7 @@ public class SpotifyLikeApp {
         favouriteArrayList.remove(currentSongIndex);
         System.out.println("\nFavorites updated.\n");
       } else {
+        // if not removed from favorites, confirms the result to the user
         System.out.println("\nNo changes made.\n");
       }
     } else {
@@ -274,6 +275,7 @@ public class SpotifyLikeApp {
         favouriteArrayList.add(currentSongIndex);
         System.out.println("\nFavorites updated.\n");
       } else {
+        // if not added to favorites, confirms the result to the user
         System.out.println("\nNo changes made.\n");
       }
     }
