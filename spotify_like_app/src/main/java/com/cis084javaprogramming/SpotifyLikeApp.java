@@ -61,7 +61,7 @@ public class SpotifyLikeApp {
     System.out.println("[F]avorites");
     System.out.println("[Q]uit");
 
-    System.out.print("\nEnter q to Quit:");
+    System.out.print("\nEnter q to Quit: ");
   }
 
   // handles the user input for the app
@@ -252,32 +252,78 @@ public class SpotifyLikeApp {
     }
     System.out.println("Found in: " + filePath + "\n");
 
-    // if the song is in the favorites list, program asks user if they would like it
-    // removed
-    if (obj.get("favorite").equals("true")) {
-      System.out.println("Would you like to remove this song to your favourites? (Y/N)");
-      String favoriteAnswer = input.next().toLowerCase();
-      if (favoriteAnswer.equals("y")) {
-        obj.put((String) "favorite", (String) "false");
-        favouriteArrayList.remove(currentSongIndex);
-        System.out.println("\nFavorites updated.\n");
-      } else {
-        // if not removed from favorites, confirms the result to the user
-        System.out.println("\nNo changes made.\n");
+    // displays and loops through song options until user chooses to go back to the
+    // main menu
+    String songOption = "";
+    while (!songOption.equals("m")) {
+      System.out.println("---- Song Options ----");
+      System.out.println("[P]ause / Resume");
+      System.out.println("[S]top");
+      System.out.println("[R]ewind 5 seconds");
+      System.out.println("[A]dvance 5 seconds");
+      System.out.println("[F]avorite");
+      System.out.println("[M]ain Menu");
+      System.out.print("\nEnter m to go back to the Main Menu: ");
+      songOption = input.next().toLowerCase();
+      System.out.println("");
+      switch (songOption) {
+        // pauses or resumes the audio file
+        case "p":
+          if (audioClip.isRunning()) {
+            System.out.println("The song is now paused.");
+            // pauses the audio file
+            audioClip.stop();
+          } else {
+            System.out.println("The song is now resuming.");
+            // resumes audio file from the stopped position
+            audioClip.start();
+          }
+          break;
+        // stops the audio file
+        case "s":
+          System.out.println("The song is now stopped.");
+          // stops the audio file
+          audioClip.stop();
+          break;
+        case "r":
+          break;
+        case "a":
+          break;
+        case "f":
+          if (obj.get("favorite").equals("true")) {
+            System.out.println("Would you like to remove this song to your favourites? (Y/N)");
+            String favoriteAnswer = input.next().toLowerCase();
+            // if the song is in the favorites list, program asks user if they would like it
+            // removed
+            if (favoriteAnswer.equals("y")) {
+              obj.put((String) "favorite", (String) "false");
+              favouriteArrayList.remove(currentSongIndex);
+              System.out.println("\nFavorites updated.\n");
+            } else {
+              // if not removed from favorites, confirms the result to the user
+              System.out.println("\nNo changes made.\n");
+            }
+          } else {
+            // if the song is not in the favorites list, program asks user if they would
+            // like it added
+            System.out.println("Would you like to add this song to your favourites? (Y/N)");
+            String favoriteAnswer = input.next().toLowerCase();
+            if (favoriteAnswer.equals("y")) {
+              obj.put((String) "favorite", (String) "true");
+              favouriteArrayList.add(currentSongIndex);
+              System.out.println("\nFavorites updated.\n");
+            } else {
+              // if not added to favorites, confirms the result to the user
+              System.out.println("\nNo changes made.\n");
+            }
+          }
+          break;
+        case "m":
+          break;
+        default:
+          break;
       }
-    } else {
-      // if the song is not in the favorites list, program asks user if they would
-      // like it added
-      System.out.println("Would you like to add this song to your favourites? (Y/N)");
-      String favoriteAnswer = input.next().toLowerCase();
-      if (favoriteAnswer.equals("y")) {
-        obj.put((String) "favorite", (String) "true");
-        favouriteArrayList.add(currentSongIndex);
-        System.out.println("\nFavorites updated.\n");
-      } else {
-        // if not added to favorites, confirms the result to the user
-        System.out.println("\nNo changes made.\n");
-      }
+
     }
   }
 
